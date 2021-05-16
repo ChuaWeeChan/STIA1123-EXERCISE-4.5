@@ -1,0 +1,96 @@
+package AbstractAndInterface;
+
+/**
+ *
+ * @author CHUA WEE CHAN 271948
+ */
+public class Blueberries extends Fruit {
+    protected int quantity;
+    protected double price, weight;
+    char vitamin;
+    protected String colour, origin;
+   
+    public Blueberries(String n,double p,int q, double w, String c, char v, String o){ //constructor sub class with argument
+        super(n);
+        price = p;
+        quantity = q;
+        weight = w;
+        colour = c;
+        vitamin = v;
+        origin = o;
+        
+        if (quantity <= 10){
+            totalPrice();
+            System.out.println("Total price for quantity less than 10 : RM "+totalPrice());
+        }
+        else if ((quantity > 10) && (quantity <=30)){
+            double newpp = 9.5;
+            totalPrice(newpp);
+            System.out.println("Total price for quantity less than 30 : RM "+totalPrice(newpp));
+        }
+        else {
+            double newppp = 9;
+            double newdisc;
+            Discount bbr = new BlueberriesDiscount();
+            newdisc = bbr.rateOfDiscount();
+            totalPrice(newppp,newdisc);
+            double totalDiscount=((quantity*newppp)*newdisc);
+            System.out.println("Total price for quantity more than 30 : RM "+totalPrice(newppp,newdisc)); 
+            System.out.println("Total discount for quantity more than 30 : RM" + totalDiscount);
+        }
+    }
+    
+    public double totalPrice(){ //overloading method with no argument
+        double totalPrice = quantity*price;
+        return totalPrice;
+    }
+   
+    public double totalPrice(double newpp){ //overloading method with 1 argument
+        double totalPrice = newpp*quantity;
+        return totalPrice;
+    }
+    
+    public double totalPrice(double newppp, double newdisc){ //overloading method with 2 argument
+        double totalDiscount = ((quantity*newppp)*newdisc);
+        double totalPrice = (quantity*newppp)-totalDiscount;
+        return totalPrice;
+    }
+    
+    public double Price(){
+        return price;
+    }
+    
+    public int Quantity(){
+        return quantity;
+    }
+    
+    public double Weight(){
+        return weight;
+    }
+    
+    public String Colour(){
+        return colour;
+    }
+    
+    public char Vitamin(){
+        return vitamin;
+    }
+    
+    public String Origin(){
+        return origin;
+    }
+    
+    public double totalWeight(){
+        double totalWeight = (quantity*weight);
+        return totalWeight;
+    }
+    
+    public String toString(){ //overriding method
+        return super.toString()
+                +"\nQuantity\t: "+quantity+"units"
+                +"\nTotal Weight\t："+totalWeight()+"gm."
+                +"\nColour\t\t: "+Colour()
+                +"\nVitamin\t\t: Vitamin "+Vitamin()
+                +"\nOrigin\t\t: "+Origin();
+    }
+}

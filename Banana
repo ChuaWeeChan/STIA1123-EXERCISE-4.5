@@ -1,0 +1,92 @@
+package AbstractAndInterface;
+
+/**
+ *
+ * @author CHUA WEE CHAN 271948
+ */
+public class Banana extends Fruit{
+    protected int quantity;
+    protected double price,weight;
+    protected String colour;
+    protected char vitamin;
+    
+    
+    public Banana(String n,double p,int q, double w, String c, char v){ //constructor sub class with 3 argument
+         super(n);
+        price = p;
+        quantity = q;
+        weight = w;
+        colour = c;
+        vitamin = v;
+        
+        if (quantity <= 10){
+            totalPrice();
+            System.out.println("Total price for quantity less than 10 : RM "+totalPrice());
+        }
+        else if ((quantity > 10) && (quantity <=50)){
+            double newpp = 4;
+            totalPrice(newpp);
+            System.out.println("Total price for quantity less than 50 : RM "+totalPrice(newpp));
+        }
+        else {
+            double newppp = 3.5;
+            double newdisc;
+            Discount bnn = new BananaDiscount();
+            newdisc = bnn.rateOfDiscount();
+            totalPrice(newppp,newdisc);
+            double totalDiscount=((quantity*newppp)*newdisc);
+            System.out.println("Total price for quantity more than 50 : RM "+totalPrice(newppp,newdisc)); 
+            System.out.println("Total discount for quantity more than 50 : RM" + totalDiscount);
+        }
+    }
+    
+    public double totalPrice(){ //overloading method with no argument
+        double totalPrice = quantity*price;
+        return totalPrice;
+    }
+   
+    public double totalPrice(double newpp){ //overloading method with 1 argument
+        double totalPrice = newpp*quantity;
+        return totalPrice;
+    }
+    
+    public double totalPrice(double newppp, double newdisc){ //overloading method with 2 argument
+        double totalDiscount = ((quantity*newppp)*newdisc);
+        double totalPrice = (quantity*newppp)-totalDiscount;
+        return totalPrice;
+    }
+    
+    public double Price(){
+        return price;
+    }
+    
+    public int Quantity(){
+        return quantity;
+    }
+    
+    public double Weight(){
+        return weight;
+    }
+    
+    public String Colour(){
+        return colour;
+    }
+    
+    public char Vitamin(){
+        return vitamin;
+    }
+    
+    public double totalWeight(){
+        double totalWeight = (quantity*weight);
+        return totalWeight;
+    }
+    
+    public String toString(){ //overriding method
+        return super.toString()
+                +"\nQuantity\t: "+quantity+"units"
+                +"\nTotal Weight\t："+totalWeight()+"gm."
+                +"\nColour\t\t: "+Colour()
+                +"\nVitamin\t\t: Vitamin "+Vitamin();
+    }
+
+}

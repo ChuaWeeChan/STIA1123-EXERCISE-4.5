@@ -1,0 +1,63 @@
+package AbstractAndInterface;
+
+/**
+ *
+ * @author CHUA WEE CHAN 271948
+ */
+public class Apple extends Fruit{
+    protected double price;
+    protected int quantity;
+    
+    public Apple(String n, double p, int q){ //constructor sub class with 3 argument
+        super(n);
+        price = p;
+        quantity = q;
+        
+        if (quantity <= 10){
+            totalPrice();
+            System.out.println("Total price for quantity less than 10 : RM "+totalPrice());
+        }
+        else if ((quantity > 10) && (quantity <=50)){
+            double newpp = 2.5;
+            totalPrice(newpp);
+            System.out.println("Total price for quantity less than 50 : RM "+totalPrice(newpp));
+        }
+        else {
+            double newppp = 2;
+            double newdisc;
+            Discount aa = new AppleDiscount();
+            newdisc = aa.rateOfDiscount();
+            totalPrice(newppp,newdisc);
+            double totalDiscount=((quantity*newppp)*newdisc);
+            System.out.println("Total price for quantity more than 50 : RM "+totalPrice(newppp,newdisc)); 
+            System.out.println("Total discount for quantity more than 50 : RM" + totalDiscount);
+        }
+    }
+    
+    public String printInfo(){
+        return "\nApple is a Fruit";
+    }
+    
+    public double totalPrice(){ //overloading method with no argument
+        double totalPrice = quantity*price;
+        return totalPrice;
+    }
+   
+    public double totalPrice(double newpp){ //overloading method with 1 argument
+        double totalPrice = newpp*quantity;
+        return totalPrice;
+    }
+    
+    public double totalPrice(double newppp, double newdisc){ //overloading method with 2 argument
+        double totalDiscount = ((quantity*newppp)*newdisc);
+        double totalPrice = (quantity*newppp)-totalDiscount;
+        return totalPrice;
+    }
+    
+    public String toString(){ //overriding method
+        return super.toString()
+                +"\nQuantity\t: "+quantity+"units";
+
+    }
+
+}

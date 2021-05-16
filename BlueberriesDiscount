@@ -1,0 +1,11 @@
+package AbstractAndInterface;
+
+/**
+ *
+ * @author CHUA WEE CHAN 271948
+ */
+public class BlueberriesDiscount implements Discount {
+    public double rateOfDiscount(){
+        return 0.1;
+    }
+}
